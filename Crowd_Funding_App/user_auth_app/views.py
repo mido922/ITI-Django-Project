@@ -3,8 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from .models import *
-from .signals import *
+from .models import * 
 
 
 def register(request):
@@ -14,6 +13,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get("username")
             messages.success(request, f"Account Create For {username} !")
+            # user_instance = User.objects.get(username=username)
             return redirect("home")
     else:
         form = UserRegisterForm()

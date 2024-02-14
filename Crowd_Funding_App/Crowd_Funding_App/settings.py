@@ -142,7 +142,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 # Blog App
 # vkrd rgrb egzm kfds
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

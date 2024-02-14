@@ -7,7 +7,6 @@ from django.core.validators import RegexValidator
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
-
     class Meta:
         model = User
         fields = [
@@ -32,7 +31,7 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     phone = forms.CharField(
         label="Phone",
-        widget=forms.TextInput(attrs={"placeholder": "ex : 012xxxxxxxx"}),
+        widget=forms.TextInput(attrs={"placeholder": "ex : 01234567890"}),
         required=False,
         validators=[
             RegexValidator(
@@ -62,6 +61,5 @@ class ProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        # fields = [ "image"]
         # fields = "__all__"
         fields = ["phone", "birthDate", "faceBookAccount", "country", "image"]
