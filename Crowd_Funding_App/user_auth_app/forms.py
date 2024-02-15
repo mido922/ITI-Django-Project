@@ -1,12 +1,17 @@
+from django.core.exceptions import ValidationError
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from django.core.validators import RegexValidator
+from .models import *
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(
+        required=True,
+    )
+
     class Meta:
         model = User
         fields = [

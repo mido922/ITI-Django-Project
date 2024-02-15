@@ -4,9 +4,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from PIL import Image
 from django.utils import timezone
+from datetime import timedelta
 
-
-class Profile(models.Model): 
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(
         max_length=100,
@@ -33,8 +33,20 @@ class Profile(models.Model):
         null=True,
     )
 
+    activation_token = models.CharField(
+        max_length=255,
+        default="",
+    )
+    activation_token_created_at = models.DateTimeField(
+        default=timezone.now,
+    )
+    activation_token_expires_at = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
         return f"{self.user.username} Profile"
+
+    def is_activation_link_valid(self):
+        return timezone.now() <= self.activation_token_expires_at
 
     # def save(self):
     #     super().save()
@@ -43,8 +55,6 @@ class Profile(models.Model):
     #         output_size = (300, 300)
     #         img.thumbnail(output_size)
     #         img.save(self.image.path)
-
-
 
 
 @receiver(post_save, sender=User)
