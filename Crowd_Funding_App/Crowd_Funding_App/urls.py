@@ -19,14 +19,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from .settings import *
-from django.contrib.auth import views as authViews
+from django.contrib.auth import views
 from django.conf.urls.static import static
 from django.conf import settings
+from user_auth_app import views as authViews
+from user_auth_app.views import CustomLoginView
 
 urlpatterns = [
     path("", include("home_app.urls")),
     path("user/", include("user_auth_app.urls")),
+    path("accounts/login/", CustomLoginView.as_view(),name="login"),    
     path("admin/", admin.site.urls),
+    path("project/", include("projects_app.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
 ]
 if settings.DEBUG:
