@@ -1,0 +1,14 @@
+{% extends 'home/base.html' %}
+{% block content %}
+
+{% for donation in listOfDonations %}
+
+<div>
+    Donated to project ID: {{donation.projectID}}
+    Value: {{donation.donationAmount}}
+    <a href="/project/{{donation.projectID}}"> Click to go to this project now. </a>
+</div>
+
+{% endfor %}
+
+{% endblock %}

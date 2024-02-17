@@ -6,6 +6,42 @@
       <div class="card">
         <div class="card-body">
           <h2>Home</h2>
+
+
+          <h1> Our Favorite Projects </h1>
+          {% for project in favoriteProjects %}
+          
+          <div class="border">
+          {{project.projectName}}
+          <br />
+          Funded {{project.currentFunds}} out of {{project.projectTarget}}
+          <br />
+          <a href="project/{{project.id}}"> Click to check it out! </a>
+          </div>
+
+          {% endfor %}
+          
+          <h1> Projects </h1>
+
+          <div class="container d-flex flex-wrap">
+          {% for project in projects %}
+          
+          <div class = "border">
+          {{project.projectName}}
+          <br />
+          Funded {{project.currentFunds}} out of {{project.projectTarget}}
+          <br />
+          <a href="project/{{project.id}}"> Click to check it out! </a>
+          </div>
+          {% endfor %}
+
+          </div>
+
+
+
+
+
+
           {% comment %} <form method="post" novalidate enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}

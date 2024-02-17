@@ -22,12 +22,17 @@ from .settings import *
 from django.contrib.auth import views as authViews
 from django.conf.urls.static import static
 from django.conf import settings
+from home_app import views
 
 urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("admin/", admin.site.urls),
-    path("", include("home_app.urls")),
     path("user/", include("user_auth_app.urls")),
+    path("project/<int:projectID>", views.showProjectPage),
+    path("addAProject", views.addAProject),
+    path("about/", views.addAProject),
+    path("", include("home_app.urls")),
+    path("yourDonations/", views.checkYourDonations, name="checkYourDonations"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

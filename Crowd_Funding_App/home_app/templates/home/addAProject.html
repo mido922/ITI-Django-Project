@@ -1,0 +1,25 @@
+{% extends 'home/base.html' %}
+{% block content %}
+
+<h1> Add a project </h1>
+
+<form action="addAProject" method="post">
+    {% csrf_token %}
+    <div class='container'>
+        <div class='row'>
+            <label class="col"> Project Name: </label>
+            <div class="col">{{form.projectName}} </div>
+        </div>
+        <div class='row'>
+            <label> Project Target: </label>
+            {{form.projectTarget}}
+        </div>
+        <div class='row'>
+            <label> Project End Date: </label>
+            {{form.endDate}}
+        </div>
+    </div>
+    <input type="submit" value="OK">
+</form>
+
+{% endblock %}

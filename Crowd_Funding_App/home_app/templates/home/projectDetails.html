@@ -1,0 +1,38 @@
+{% extends 'home/base.html' %}
+{% block content %}
+
+<div>
+
+Started by {{project.username}} on {{project.startDate}}
+</div>
+<div>
+{{project.currentFunds}} out of {{project.projectTarget}} donated.
+</div>
+
+<form action="addADonation/{{project.id}}" method="post">
+    {% csrf_token %}
+    {{ donationForm }}
+    <input type="submit" value="OK">
+</form>
+
+{% comment %} Block for the form for user comments below. {% endcomment %}
+
+<form action="addAComment/{{project.id}}" method="post">
+    {% csrf_token %}
+    {{ commentForm }}
+    <input type="submit" value="OK">
+</form>
+
+{% comment %} Block for user comments below. {% endcomment %}
+
+{% for comment in listOfComments %}
+
+<div class="container border">  
+    <div class="row"> {{comment.username}} </div>
+    <p class="row"> {{comment.commentContent}} </p>
+    <div class="row"> {{comment.commentDate}} </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
