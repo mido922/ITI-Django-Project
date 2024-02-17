@@ -22,6 +22,7 @@ class CustomLoginView(LoginView):
     def form_invalid(self, form):
         username = form.cleaned_data["username"]
         userIsFound = User.objects.filter(username=username).exists()
+        print(userIsFound)
         # Set a custom error message
         if userIsFound:
             user = User.objects.get(username=username)
@@ -31,8 +32,10 @@ class CustomLoginView(LoginView):
                     self.request,
                     "Your account is not activated. Check your email for the activation link.",
                 )
-            
-            CustomLoginView.isActivationLink = not user_profile.is_activation_link_valid()
+
+            CustomLoginView.isActivationLink = (
+                not user_profile.is_activation_link_valid()
+            )
             if CustomLoginView.isActivationLink:
                 messages.warning(self.request, "The activation link has expired.")
         else:
@@ -127,6 +130,7 @@ def activate(request, uidb64, token):
         return HttpResponse("Activation link is invalid.")
 
 
+# Resend Activation Link
 def reSendActivationMail(request):
     if request.method == "POST":
         email = request.POST["email"]
@@ -164,6 +168,7 @@ def reSendActivationMail(request):
         return render(request, "registration/resend_activation_link_form.html")
 
 
+# Show / Update Personal Profile
 @login_required
 def personalProfile(request):
     if request.method == "POST":
@@ -184,6 +189,8 @@ def personalProfile(request):
 
     return render(request, "registration/personalProfile.html", context)
 
+
+# Show / Update Project Profile
 @login_required
 def projectProfile(request):
     if request.method == "POST":
@@ -191,9 +198,29 @@ def projectProfile(request):
     else:
         return render(request, "registration/projectProfile.html")
 
+
+# Show / Update Donations Profile
 @login_required
 def donationsProfile(request):
     if request.method == "POST":
         return redirect("donationsProfile")
     else:
         return render(request, "registration/donationsProfile.html")
+
+
+# Delete Account
+@login_required
+def deleteAccount(request):
+    if request.method == "POST":
+        # Check if the entered password is correct
+        password = request.POST.get("password")
+        if request.user.check_password(password):
+            # If password is correct, delete the account
+            request.user.delete()
+            messages.success(request, "Your account has been successfully deleted.")
+            return redirect("home")
+        else:
+            # If password is incorrect, show an error message
+            messages.warning(request, "Incorrect password. Account deletion failed.")
+            return redirect("deleteAccount")
+    return render(request, "registration/delete_account_confirmation.html")

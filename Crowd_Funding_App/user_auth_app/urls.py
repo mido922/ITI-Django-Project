@@ -7,5 +7,10 @@ urlpatterns = [
     path("profile/project", views.projectProfile, name="projectProfile"),
     path("profile/donations", views.donationsProfile, name="donationsProfile"),
     path("activate/<uidb64>/<token>/", views.activate, name="activate"),
-     path("activate/Resend-Email-Activation", views.reSendActivationMail, name="resendEmailActivation"),
+    path(
+        "activate/Resend-Email-Activation",
+        views.reSendActivationMail,
+        name="resendEmailActivation",
+    ),
+    path("delete-account", views.deleteAccount, name="deleteAccount"),
 ]

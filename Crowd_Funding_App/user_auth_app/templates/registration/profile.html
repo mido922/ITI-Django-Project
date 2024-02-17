@@ -8,6 +8,7 @@
         <h2 class="account-heading">{{ user.username }}</h2>
         <p class="text-secondary">{{ user.email }}</p>
       </div>
+      <a class="btn btn-outline-danger" href="{% url 'deleteAccount' %}">Delete Account</a>
     </div>
     {% block section %}
 
