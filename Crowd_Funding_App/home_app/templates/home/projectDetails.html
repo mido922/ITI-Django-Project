@@ -9,6 +9,26 @@ Started by {{project.username}} on {{project.startDate}}
 {{project.currentFunds}} out of {{project.projectTarget}} donated.
 </div>
 
+<div>Started on: {{project.startDate}}, ending on {{project.endDate}} </div>
+
+<a href="/project/cancelYourProject/{{project.id}}">Cancel This Project </a>
+<a href="/project/addAProjectReport/{{project.id}}">Report This Project </a>
+<a href="/project/addARating/{{project.id}}/1">Give this project a 1.</a>
+<a href="/project/addARating/{{project.id}}/2">Give this project a 2.</a>
+<a href="/project/addARating/{{project.id}}/3">Give this project a 3.</a>
+<a href="/project/addARating/{{project.id}}/4">Give this project a 4.</a>
+<a href="/project/addARating/{{project.id}}/5">Give this project a 5.</a>
+
+<div> This project's tags are: </div>
+
+{% for tag in tags %}
+
+{{tag.tagContent}},
+
+{% endfor %}
+
+<div> This project's average rating is: {{rating}} </div>
+
 <form action="addADonation/{{project.id}}" method="post">
     {% csrf_token %}
     {{ donationForm }}
@@ -26,11 +46,11 @@ Started by {{project.username}} on {{project.startDate}}
 {% comment %} Block for user comments below. {% endcomment %}
 
 {% for comment in listOfComments %}
-
-<div class="container border">  
+<div class="container border">
     <div class="row"> {{comment.username}} </div>
     <p class="row"> {{comment.commentContent}} </p>
     <div class="row"> {{comment.commentDate}} </div>
+    <a href="/project/addACommentReport/{{comment.id}}">Report this comment.</a>
 </div>
 
 {% endfor %}
