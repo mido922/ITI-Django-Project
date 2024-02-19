@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12" >
+    <div class="card "> 
+      <div class="card-body">
+        <h2 class="text-center mb-4">Home</h2>
+        <h3 class="text-center mb-4">Last 5 Projects</h3> 
+        <div id="projectCarousel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            {% for project in last_5_projects %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="row justify-content-center">
+                <div class="col-md-6 mb-4">
+                  <div class="card " >
+                    <img width="200" height="270"      src="{% static 'home/images/th.jpeg' %}" class="card-img-top">
+                    <div class="card-body text-center bg-light"> 
+                      <h5 class="card-title text-dark">{{ project.title }}</h5> 
+                      <p class="card-text text-dark">{{ project.details }}</p>
+                      <a href="{% url 'projectDetails' project.id %}" class="btn btn-danger">View More</a> <!-- Button in primary color -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="carousel-item active">
+              <h5 class="text-light text-center">No Projects Found</h5>
+            </div>
+            {% endfor %}
+          </div>
+          <a class="carousel-control-prev" href="#projectCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon bg-danger" aria-hidden="true" style="color: white;"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#projectCarousel" role="button" data-slide="next" >
+            <span class="carousel-control-next-icon bg-danger" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

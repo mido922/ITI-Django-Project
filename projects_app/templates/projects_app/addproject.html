@@ -1,0 +1,19 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+  <div class="contents">
+    <h1><span>Add New Project</span></h1>
+    <div class="container" style=" margin-right: 340px; margin-top: 25px;">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="input-group">
+          <input multiple  type="file" name="images" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+          <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Add Project</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+{% endblock %}
