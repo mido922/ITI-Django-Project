@@ -13,10 +13,14 @@ from  projects_app.models import Category, Projects
 def home(request):
     cat_menu = Category.objects.all()
     last_5_projects = Projects.objects.order_by('-id')[:5]
+    featured_projects = Projects.objects.filter(featured=True)[:5]
+    
+
     print(last_5_projects)
     context = {
         'cat_menu': cat_menu,
         'last_5_projects': last_5_projects,
+         'featured_projects': featured_projects
     }
     return render(request, 'home/home.html', context)
 def get_category_projects(request, category_id):

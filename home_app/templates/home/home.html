@@ -2,7 +2,10 @@
 {% load static %} 
 {% load crispy_forms_tags %}
 {% block content %}
+  
 <div class="row justify-content-center">
+
+
   <div class="col-12" >
     <div class="card "> 
       <div class="card-body">
@@ -15,7 +18,7 @@
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-4">
                   <div class="card " >
-                    <img width="200" height="270"      src="{% static 'home/images/th.jpeg' %}" class="card-img-top">
+                    <img width="100" height="200"      src="{% static 'home/images/th.jpeg' %}" class="card-img-top">
                     <div class="card-body text-center bg-light"> 
                       <h5 class="card-title text-dark">{{ project.title }}</h5> 
                       <p class="card-text text-dark">{{ project.details }}</p>
@@ -43,6 +46,38 @@
         </div>
       </div>
     </div>
+    <div id="featured" class="col-lg-12 ms-auto me-auto p-lg-2 mt-lg-0 mt-4">
+      <div class="card-body pt-5 text-center">
+              
+          <h2 class="text-danger up mb-4 text-center">
+              <i class="fa-solid fa-lightbulb mx-3 text-center"></i>Featured Projects
+          </h2>
+  
+          <div class="card-body pt-5 text-center">
+              {% for project in featured_projects %}
+              <div class="mb-4"> 
+                  <div class="bg-secondary rounded p-3">
+                      <div class="card-header">
+                          <img width="150" height="150" src="{% static 'home/images/th.jpeg' %}" class="card-img-top">
+                          <h5 class="card-title bg-white">{{ project.title}}</h5>
+                      </div>
+                      <div class="card-body">
+                          <p class="card-text">{{ project.description }}</p>
+                       
+                      </div>
+                      <div class="card-footer bg-white">
+                          <a href="{% url 'projectDetails' project.id %}" class="btn btn-danger">View Details</a>
+                      </div>
+                  </div>
+              </div>
+              {% empty %}
+              <div class="col">
+                  <h5 class="text-light text-center">No Featured Projects</h5>
+              </div>
+              {% endfor %}
+          </div>
+      </div>
   </div>
 </div>
-{% endblock %}
+ {% endblock %}
+

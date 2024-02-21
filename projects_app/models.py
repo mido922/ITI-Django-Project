@@ -13,6 +13,7 @@ class Projects(models.Model):
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     total_target = models.DecimalField(max_digits=10, decimal_places=2)
     tags = models.CharField(blank=True)  
+    featured = models.BooleanField(default=False)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
