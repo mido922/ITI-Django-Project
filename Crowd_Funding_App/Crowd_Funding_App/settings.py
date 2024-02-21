@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     #
     "home_app.apps.HomeAppConfig",
     "user_auth_app.apps.UserAuthAppConfig",
+    "projects_app.apps.ProjectsAppConfig",
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_URL = "login"
@@ -94,7 +95,7 @@ DATABASES = {
         "Host": "localhost",
         "PORT": "5432",
         "USER": "postgres",
-        "PASSWORD": "120699",
+        "PASSWORD": "password",
     }
 }
 
