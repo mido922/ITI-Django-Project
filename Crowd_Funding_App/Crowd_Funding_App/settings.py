@@ -44,13 +44,8 @@ INSTALLED_APPS = [
     #
     "home_app.apps.HomeAppConfig",
     "user_auth_app.apps.UserAuthAppConfig",
+    "projects_app.apps.ProjectsAppConfig",
 ]
-CRISPY_TEMPLATE_PACK = "bootstrap4"
-LOGIN_URL = "login"
-# change login directory
-LOGIN_REDIRECT_URL = "home"
-# change logout directory
-LOGOUT_REDIRECT_URL = "home"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -137,12 +132,20 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Blog App
+#
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+LOGIN_URL = "login"
+# change login directory
+LOGIN_REDIRECT_URL = "home"
+# change logout directory
+LOGOUT_REDIRECT_URL = "home"
+
+# Crowd_Funding_App
 # vkrd rgrb egzm kfds
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"

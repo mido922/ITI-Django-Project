@@ -6,40 +6,19 @@ from PIL import Image
 from django.utils import timezone
 from datetime import timedelta
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(
-        max_length=100,
-        default="01234567890",
-        null=True,
-    )
-    birthDate = models.DateField(
-        default=timezone.now,
-        null=True,
-    )
-    faceBookAccount = models.URLField(
-        default="https://example.com",
-        null=True,
-    )
-    country = models.CharField(
-        max_length=100,
-        default="Country",
-        null=True,
-    )
+    phone = models.CharField(max_length=100, default="01234567890", null=True)
+    birthDate = models.DateField(default=timezone.now, null=True)
+    faceBookAccount = models.URLField(default="https://example.com", null=True)
+    country = models.CharField(max_length=100, default="Country", null=True)
     image = models.ImageField(
-        default="default.png",
-        upload_to="profile_picture",
-        blank=True,
-        null=True,
+        default="default.png", upload_to="profile_picture", blank=True, null=True
     )
 
-    activation_token = models.CharField(
-        max_length=255,
-        default="",
-    )
-    activation_token_created_at = models.DateTimeField(
-        default=timezone.now,
-    )
+    activation_token = models.CharField(max_length=255, default="")
+    activation_token_created_at = models.DateTimeField(default=timezone.now)
     activation_token_expires_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -61,6 +40,7 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):

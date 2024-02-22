@@ -9,8 +9,11 @@
           <form method="post" novalidate enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="btn btn-primary">Log in</button>
+            <button type="submit" class="btn btn-primary">Login</button>
             <a href="{% url 'password_reset' %}" class="btn btn-link">Forgot your password?</a>
+            {% if isActivationLink %}
+              <a href="{% url 'resendEmailActivation' %}" class="btn btn-link">Resend Email Activation?</a>
+            {% endif %}
           </form>
         </div>
       </div>

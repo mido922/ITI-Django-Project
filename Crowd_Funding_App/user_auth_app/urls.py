@@ -1,12 +1,16 @@
-from django.contrib import admin
 from django.urls import path
-from django.contrib.auth import views as authViews
 from . import views
-
-from .views import *
 
 urlpatterns = [
     path("register/", views.register, name="register"),
-    path("profile/", views.profile, name="profile"),
+    path("profile/personal", views.personalProfile, name="personalProfile"),
+    path("profile/project", views.projectProfile, name="projectProfile"),
+    path("profile/donations", views.donationsProfile, name="donationsProfile"),
     path("activate/<uidb64>/<token>/", views.activate, name="activate"),
+    path(
+        "activate/Resend-Email-Activation",
+        views.reSendActivationMail,
+        name="resendEmailActivation",
+    ),
+    path("delete-account", views.deleteAccount, name="deleteAccount"),
 ]
